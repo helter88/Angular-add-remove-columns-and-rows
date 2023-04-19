@@ -6,21 +6,24 @@
     <table>
       <tr formArrayName="displayedHead">
         <th *ngFor="let col of displayedHead.controls; let i=index">
-          <input [formControlName]="i">
+          <input type="number" [formControlName]="i">
         </th>
-        <button>Add Column</button>
+        <button (click)="addColumn()">Add Column</button>
       </tr>
       <ng-container formArrayName="myFormArray">
         <tr *ngFor="let element of myFormArray.controls;let i=index">
           <ng-container [formArrayName]="i">
 
             <th *ngFor="let e of myFormArray2(i).controls; let j=index">
-              <input [formControlName]="j">
+              <input type="number" [formControlName]="j">
             </th>
           </ng-container>
         </tr>
       </ng-container>
     </table>
   </ng-container>
+  <button (click)="addRow()">Add Row</button>
 </ng-container>
-<button (click)="onSave()">Save</button>
+<div>
+  <button (click)="onSave()">Save</button>
+</div>

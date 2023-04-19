@@ -1,0 +1,95 @@
+W Angularze w pliku app.component.ts mamy dane:
+import { Component } from '@angular/core';
+import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss']
+})
+export class AppComponent {
+
+  form = this.fb.group({
+    name: 'Artur',
+    displayedHead: this.fb.array([
+      this.fb.control(1),
+      this.fb.control(2)
+    ]),
+    myFormArray: this.fb.array([
+      this.fb.array(['ala','lolo']),
+      this.fb.array(['kotek','koko']),
+
+    ])
+  })
+
+  constructor(private fb: FormBuilder) {
+  }
+
+  get displayedHead(): FormArray {
+    return this.form.get("displayedHead") as FormArray;
+  }
+
+  get myFormArray(): FormArray {
+    return this.form.get("myFormArray") as FormArray;
+  }
+  
+   myFormArray2(i: number): FormArray {
+   let nestedArray = this.form.get("myFormArray") as FormArray<FormArray>;
+   let b =  nestedArray.controls[i];
+    return b;
+  }
+
+  displalog(col:any) {
+    console.log(col)
+  }
+
+  addColumn(): void {
+    this.displayedHead.push(3);
+  }
+
+  onSave() {
+    console.log(this.form.value)
+  }
+}
+Z kolei w pliku app.component.html mam dane:
+<ng-container [formGroup]="form">
+  <div class="nameInput">
+    <input formControlName="name">
+  </div>
+  <ng-container>
+    <table>
+      <tr formArrayName="displayedHead">
+        <th *ngFor="let col of displayedHead.controls; let i=index">
+          <input [formControlName]="i">
+        </th>
+        <button (click)="addColumn()">Add Column</button>
+      </tr>
+      <ng-container formArrayName="myFormArray">
+        <tr *ngFor="let element of myFormArray.controls;let i=index">
+          <ng-container [formArrayName]="i">
+
+            <th *ngFor="let e of myFormArray2(i).controls; let j=index">
+              <input [formControlName]="j">
+            </th>
+          </ng-container>
+        </tr>
+      </ng-container>
+    </table>
+  </ng-container>
+</ng-container>
+<button (click)="onSave()">Save</button>
+
+W momencie kiedy klikam na ekranie button Add Column to dostaję następujący błąd:
+p.component.html:11 ERROR TypeError: control.setParent is not a function
+    at FormArray._registerControl (forms.mjs:6845:17)
+    at FormArray.push (forms.mjs:6527:14)
+    at AppComponent.addColumn (app.component.ts:43:24)
+    at AppComponent_Template_button_click_7_listener (app.component.html:11:26)
+    at executeListenerWithErrorHandling (core.mjs:13991:16)
+    at wrapListenerIn_markDirtyAndPreventDefault (core.mjs:14024:22)
+    at HTMLButtonElement.<anonymous> (platform-browser.mjs:457:38)
+    at _ZoneDelegate.invokeTask (zone.js:409:31)
+    at core.mjs:23892:55
+    at AsyncStackTaggingZoneSpec.onInvokeTask (core.mjs:23892:36)
+h
+Czemu ?
