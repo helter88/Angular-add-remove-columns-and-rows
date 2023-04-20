@@ -52,9 +52,22 @@ export class AppComponent {
     )
   }
 
+  removeColumn(): void {
+    const lastColumnIndex = this.displayedHead.length - 1;
+    this.displayedHead.removeAt(lastColumnIndex);
+    this.myFormArray.controls.forEach((control: AbstractControl<any>, index: number, array: AbstractControl<any>[]) => {
+      const formArray = control as FormArray;
+      formArray.removeAt(lastColumnIndex);
+    });
+  }
+
   addRow(): void {
     this.myFormArray.push(this.fb.array(this.nullGenerator()));
-    this.myFormArray.updateValueAndValidity();
+  }
+
+  removeRow(): void {
+    const lastRowIndex = this.myFormArray.length - 1;
+    this.myFormArray.removeAt(lastRowIndex);
   }
 
   onSave() {
