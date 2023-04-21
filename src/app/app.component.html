@@ -7,14 +7,14 @@
       <tr>
         <th></th>
       </tr>
-      <ng-container formArrayName="optionsArray">
+      <div formArrayName="optionsArray" class="options">
         <tr *ngFor="let option of optionsArray.controls; let i=index">
-          <select [formControlName]="i">
+          <select class="rowOp" [formControlName]="i">
             <option>Choose Option</option>
             <option *ngFor="let opt of allOptions" [ngValue]="opt">{{opt}}</option>
           </select>
         </tr>
-      </ng-container>
+      </div>
     </th>
     <th>
       <tr formArrayName="displayedHead">
