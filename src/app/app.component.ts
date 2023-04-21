@@ -60,6 +60,7 @@ export class AppComponent {
   }
 
   removeColumn(i: number): void {
+    if (this.displayedHead.length === 1) return
     this.displayedHead.removeAt(i);
     this.myFormArray.controls.forEach((control: AbstractControl<any>, index: number, array: AbstractControl<any>[]) => {
       const formArray = control as FormArray;
@@ -82,6 +83,7 @@ export class AppComponent {
   }
 
   removeRow(i: number): void {
+    if(this.optionsArray.length === 1) return;
     this.myFormArray.removeAt(i);
     this.optionsArray.removeAt(i);
   }
