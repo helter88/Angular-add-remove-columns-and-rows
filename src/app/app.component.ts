@@ -19,10 +19,12 @@ export class AppComponent {
       this.fb.array([111,222]),
     ]),
     optionsArray: this.fb.array([
-      this.fb.control('A'),
-      this.fb.control('B')
+      this.fb.control("Choose Option"),
+      this.fb.control("Choose Option"),
     ])
   })
+
+  allOptions: any = ['A', 'B', 'C', 'D']
 
   constructor(private fb: FormBuilder) {
     this.form.valueChanges.subscribe((val)=> console.log(val));
@@ -79,7 +81,7 @@ export class AppComponent {
 
   addRow(): void {
     this.myFormArray.push(this.fb.array(this.nullGenerator()));
-    this.optionsArray.push(this.fb.control(null));
+    this.optionsArray.push(this.fb.control("Choose Option"));
   }
 
   removeRow(i: number): void {

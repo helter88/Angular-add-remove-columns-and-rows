@@ -10,8 +10,8 @@
       <ng-container formArrayName="optionsArray">
         <tr *ngFor="let option of optionsArray.controls; let i=index">
           <select [formControlName]="i">
-            <option> c </option>
-            <option> d </option>
+            <option>Choose Option</option>
+            <option *ngFor="let opt of allOptions" [ngValue]="opt">{{opt}}</option>
           </select>
         </tr>
       </ng-container>
