@@ -70,11 +70,13 @@ export class AppComponent {
 
   addRow(): void {
     this.myFormArray.push(this.fb.array(this.nullGenerator()));
+    this.optionsArray.push(this.fb.control(null));
   }
 
   removeRow(): void {
     const lastRowIndex = this.myFormArray.length - 1;
     this.myFormArray.removeAt(lastRowIndex);
+    this.optionsArray.removeAt(lastRowIndex);
   }
 
   onSave() {

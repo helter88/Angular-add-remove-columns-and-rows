@@ -3,34 +3,39 @@
     <input formControlName="name">
   </div>
   <table>
-    <tr formArrayName="displayedHead">
-      <th>
-        empty
-      </th>
-      <th *ngFor="let col of displayedHead.controls; let i=index">
-        <input type="number" [formControlName]="i">
-      </th>
-      <div>
-        <button (click)="addColumn()">Add Column</button>
-        <button (click)="removeColumn()">Remove Column</button>
-      </div>
-    </tr>
-    <tr>
-      <th formArrayName="optionsArray">
-    <tr *ngFor="let option of optionsArray.controls; let i=index">
-      <input [formArrayName]="i">
-    </tr>
-    </th>
-    <ng-container formArrayName="myFormArray">
-      <tr *ngFor="let element of myFormArray.controls;let i=index">
-        <ng-container [formArrayName]="i">
-          <th *ngFor="let e of myFormArray2(i).controls; let j=index">
-            <input type="number" [formControlName]="j">
-          </th>
-        </ng-container>
+    <th>
+      <tr>
+        <th class="emptyTh"></th>
       </tr>
-    </ng-container>
-    </tr>
+      <ng-container formArrayName="optionsArray">
+        <tr *ngFor="let option of optionsArray.controls; let i=index">
+          <select [formControlName]="i">
+            <option> c </option>
+            <option> d </option>
+          </select>
+        </tr>
+      </ng-container>
+    </th>
+    <th>
+      <tr formArrayName="displayedHead">
+        <th *ngFor="let col of displayedHead.controls; let i=index">
+          <input type="number" [formControlName]="i">
+        </th>
+        <div>
+          <button (click)="addColumn()">Add Column</button>
+          <button (click)="removeColumn()">Remove Column</button>
+        </div>
+      </tr>
+      <ng-container formArrayName="myFormArray">
+        <tr *ngFor="let element of myFormArray.controls;let i=index">
+          <ng-container [formArrayName]="i">
+            <th *ngFor="let e of myFormArray2(i).controls; let j=index">
+              <input type="number" [formControlName]="j">
+            </th>
+          </ng-container>
+        </tr>
+      </ng-container>
+    </th>
   </table>
 </ng-container>
 <div>
