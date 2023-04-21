@@ -17,7 +17,10 @@ export class AppComponent {
     myFormArray: this.fb.array([
       this.fb.array([11,22]),
       this.fb.array([111,222]),
-
+    ]),
+    optionsArray: this.fb.array([
+      this.fb.control('A'),
+      this.fb.control('B')
     ])
   })
 
@@ -37,6 +40,10 @@ export class AppComponent {
    let nestedArray = this.form.get("myFormArray") as FormArray<FormArray>;
    let b =  nestedArray.controls[i];
     return b;
+  }
+
+  get optionsArray(): FormArray {
+    return this.form.get("optionsArray") as FormArray;
   }
 
   displalog(col:any) {

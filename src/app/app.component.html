@@ -2,35 +2,41 @@
   <div class="nameInput">
     <input formControlName="name">
   </div>
-  <ng-container>
-    <table>
-      <tr formArrayName="displayedHead">
-        <th *ngFor="let col of displayedHead.controls; let i=index">
-          <input type="number" [formControlName]="i">
-        </th>
-        <div>
-          <button (click)="addColumn()">Add Column</button>
-          <button (click)="removeColumn()">Remove Column</button>
-        </div>
-
+  <table>
+    <tr formArrayName="displayedHead">
+      <th>
+        empty
+      </th>
+      <th *ngFor="let col of displayedHead.controls; let i=index">
+        <input type="number" [formControlName]="i">
+      </th>
+      <div>
+        <button (click)="addColumn()">Add Column</button>
+        <button (click)="removeColumn()">Remove Column</button>
+      </div>
+    </tr>
+    <tr>
+      <th formArrayName="optionsArray">
+    <tr *ngFor="let option of optionsArray.controls; let i=index">
+      <input [formArrayName]="i">
+    </tr>
+    </th>
+    <ng-container formArrayName="myFormArray">
+      <tr *ngFor="let element of myFormArray.controls;let i=index">
+        <ng-container [formArrayName]="i">
+          <th *ngFor="let e of myFormArray2(i).controls; let j=index">
+            <input type="number" [formControlName]="j">
+          </th>
+        </ng-container>
       </tr>
-      <ng-container formArrayName="myFormArray">
-        <tr *ngFor="let element of myFormArray.controls;let i=index">
-          <ng-container [formArrayName]="i">
-
-            <th *ngFor="let e of myFormArray2(i).controls; let j=index">
-              <input type="number" [formControlName]="j">
-            </th>
-          </ng-container>
-        </tr>
-      </ng-container>
-    </table>
-  </ng-container>
-  <div>
-    <button (click)="addRow()">Add Row</button>
-    <button (click)="removeRow()">Remove Row</button>
-  </div>
+    </ng-container>
+    </tr>
+  </table>
 </ng-container>
+<div>
+  <button (click)="addRow()">Add Row</button>
+  <button (click)="removeRow()">Remove Row</button>
+</div>
 <div>
   <button (click)="onSave()">Save</button>
 </div>
