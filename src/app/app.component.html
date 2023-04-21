@@ -5,7 +5,7 @@
   <table>
     <th>
       <tr>
-        <th class="emptyTh"></th>
+        <th></th>
       </tr>
       <ng-container formArrayName="optionsArray">
         <tr *ngFor="let option of optionsArray.controls; let i=index">
@@ -19,11 +19,13 @@
     <th>
       <tr formArrayName="displayedHead">
         <th *ngFor="let col of displayedHead.controls; let i=index">
-          <input type="number" [formControlName]="i">
+          <div class="head">
+            <button (click)="removeColumn(i)">Remove Column</button>
+            <input type="number" [formControlName]="i">
+          </div>
         </th>
         <div>
           <button (click)="addColumn()">Add Column</button>
-          <button (click)="removeColumn()">Remove Column</button>
         </div>
       </tr>
       <ng-container formArrayName="myFormArray">
@@ -33,6 +35,7 @@
               <input type="number" [formControlName]="j">
             </th>
           </ng-container>
+          <button (click)="removeRow(i)">Remove Row</button>
         </tr>
       </ng-container>
     </th>
@@ -40,7 +43,6 @@
 </ng-container>
 <div>
   <button (click)="addRow()">Add Row</button>
-  <button (click)="removeRow()">Remove Row</button>
 </div>
 <div>
   <button (click)="onSave()">Save</button>

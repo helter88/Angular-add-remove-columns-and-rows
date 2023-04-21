@@ -59,25 +59,38 @@ export class AppComponent {
     )
   }
 
-  removeColumn(): void {
-    const lastColumnIndex = this.displayedHead.length - 1;
-    this.displayedHead.removeAt(lastColumnIndex);
+  removeColumn(i: number): void {
+    this.displayedHead.removeAt(i);
     this.myFormArray.controls.forEach((control: AbstractControl<any>, index: number, array: AbstractControl<any>[]) => {
       const formArray = control as FormArray;
-      formArray.removeAt(lastColumnIndex);
+      formArray.removeAt(i);
     });
   }
+
+  // removeLastColumn(): void {
+  //   const lastColumnIndex = this.displayedHead.length - 1;
+  //   this.displayedHead.removeAt(lastColumnIndex);
+  //   this.myFormArray.controls.forEach((control: AbstractControl<any>, index: number, array: AbstractControl<any>[]) => {
+  //     const formArray = control as FormArray;
+  //     formArray.removeAt(lastColumnIndex);
+  //   });
+  // }
 
   addRow(): void {
     this.myFormArray.push(this.fb.array(this.nullGenerator()));
     this.optionsArray.push(this.fb.control(null));
   }
 
-  removeRow(): void {
-    const lastRowIndex = this.myFormArray.length - 1;
-    this.myFormArray.removeAt(lastRowIndex);
-    this.optionsArray.removeAt(lastRowIndex);
+  removeRow(i: number): void {
+    this.myFormArray.removeAt(i);
+    this.optionsArray.removeAt(i);
   }
+
+  // removeLastRow(): void {
+  //   const lastRowIndex = this.myFormArray.length - 1;
+  //   this.myFormArray.removeAt(lastRowIndex);
+  //   this.optionsArray.removeAt(lastRowIndex);
+  // }
 
   onSave() {
     console.log(this.form.value)
